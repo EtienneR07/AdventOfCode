@@ -2,7 +2,7 @@
 
 namespace MyApp
 {
-    internal class Program
+    internal class ProgramD2
     {
         static Dictionary<char, (int ForShape, int ForRound)> BasePoints 
             = new Dictionary<char, (int ForShape, int ForRound)>() { 

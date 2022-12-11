@@ -2,7 +2,7 @@
 
 namespace MyApp
 {
-    internal class Program
+    internal class ProgramD1
     {
         static void Main(string[] args)
         {
