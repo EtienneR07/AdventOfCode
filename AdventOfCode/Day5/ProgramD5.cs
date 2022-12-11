@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Utility;
 
 namespace Day5
 {
@@ -6,21 +7,15 @@ namespace Day5
     {
         static void Main(string[] args)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "Day5.Input.txt";
-            var crate = 0;
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    var spaces = line.Count(char.IsWhiteSpace);
-                    Console.WriteLine(spaces);
-                }
-            }
+            var lines = FileReader.GetInputLines(5);
 
-            Console.WriteLine($"Number of pairs A: {crate}");
+            var solver = new SolverD5();
+
+            var outputA = solver.SolveA(lines);
+            //var outputB = solver.SolveB(lines);
+
+            Console.WriteLine($"Part A: {outputA}");
+            //Console.WriteLine($"Part B: {lines}");
         }
     }
 }
