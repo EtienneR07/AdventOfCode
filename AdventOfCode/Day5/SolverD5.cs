@@ -1,40 +1,49 @@
-﻿using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using Utility;
+﻿using System.Text.RegularExpressions;
 
 namespace Day5
 {
     public class SolverD5
     {
+        public static List<Stack<char>> Stacks = new List<Stack<char>>();
+
         public string SolveA(IEnumerable<string> inputLines)
         {
-            var stacks = GetStacks(inputLines.Take(8), 9);
+            Stacks = GetStacks(inputLines.Take(8), 9);
 
             foreach (string line in inputLines.Skip(10))
             {
-                Regex rgx = new Regex("[^0-9]"); ;
-                var str = rgx.Replace(line, " ");
-
-                var elements = Regex.Replace(str, @"\s+", " ").Substring(1).Split(' ');
-                var nbOfElements = int.Parse(elements[0]);
-
-                var from = stacks.Skip(int.Parse(elements[1]) - 1).First();
-                var to = stacks.Skip(int.Parse(elements[2]) - 1).First();
-
-                for (int i = 0; i < nbOfElements; i++)
+                var instructions = GetInstructions(line);
+                for (int i = 0; i < instructions.NbOfElements; i++)
                 {
-                    var toMove = from.Pop();
-                    to.Push(toMove);
+                    var toMove = instructions.From.Pop();
+                    instructions.To.Push(toMove);
                 }
             }
             
-            return new string(stacks.Select(s => s.Peek()).ToArray());
+            return new string(Stacks.Select(s => s.Peek()).ToArray());
         }
 
         public string SolveB(IEnumerable<string> inputLines)
         {
-            throw new NotImplementedException();
+            Stacks = GetStacks(inputLines.Take(8), 9);
+
+            foreach (string line in inputLines.Skip(10))
+            {
+                var instructions = GetInstructions(line);
+
+                var listOfMoves = new List<char>();
+                for (int i = 0; i < instructions.NbOfElements; i++)
+                {
+                    listOfMoves.Add(instructions.From.Pop());
+                }
+                listOfMoves.Reverse();
+                foreach (char move in listOfMoves)
+                {
+                    instructions.To.Push(move);
+                }
+            }
+
+            return new string(Stacks.Select(s => s.Peek()).ToArray());
         }
 
         public List<Stack<char>> GetStacks(IEnumerable<string> lines, int length)
@@ -65,6 +74,20 @@ namespace Day5
             }
 
             return result;
+        }
+
+        public (int NbOfElements, Stack<char> From, Stack<char> To) GetInstructions(string line)
+        {
+            Regex rgx = new Regex("[^0-9]"); ;
+            var str = rgx.Replace(line, " ");
+
+            var elements = Regex.Replace(str, @"\s+", " ").Substring(1).Split(' ');
+            var nbOfElements = int.Parse(elements[0]);
+
+            var from = Stacks.Skip(int.Parse(elements[1]) - 1).FirstOrDefault() ?? new Stack<char>();
+            var to = Stacks.Skip(int.Parse(elements[2]) - 1).FirstOrDefault() ?? new Stack<char>();
+
+            return (nbOfElements, from, to);
         }
     }
 }

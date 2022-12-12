@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Utility;
+﻿using Utility;
 
 namespace Day5
 {
@@ -7,15 +6,15 @@ namespace Day5
     {
         static void Main(string[] args)
         {
-            var lines = FileReader.GetInputLines(5);
+            var lines = FileReader.GetInputLinesForDay(5);
 
             var solver = new SolverD5();
 
             var outputA = solver.SolveA(lines);
-            //var outputB = solver.SolveB(lines);
+            var outputB = solver.SolveB(lines);
 
             Console.WriteLine($"Part A: {outputA}");
-            //Console.WriteLine($"Part B: {lines}");
+            Console.WriteLine($"Part B: {outputB}");
         }
     }
 }

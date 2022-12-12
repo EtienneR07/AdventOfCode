@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <None Remove="Files\InputD5.txt" />
+    <None Remove="Files\InputD7.txt" />
+    <None Remove="Files\TestD7.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Files\TestD7.txt" />
+    <EmbeddedResource Include="Files\InputD7.txt" />
     <EmbeddedResource Include="Files\InputD5.txt" />
   </ItemGroup>
 
