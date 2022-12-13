@@ -5,7 +5,19 @@ namespace Day7
 {
     public class SolverD7
     {
+        public int RequiredUnusedSpace = 30000000;
+        public int TotalSpace = 70000000;
+
         public int SolveA(IEnumerable<string> inputLines)
+        {
+            var flatTree = GetFlatrTree(inputLines);
+
+            return flatTree
+                .Where(f => f.Size <= 100000 && !f.IsFile)
+                .Sum(f => f.Size);
+        }
+
+        public IEnumerable<FileSystemNode> GetFlatrTree(IEnumerable<string> inputLines)
         {
             var fileSystem = new FileSystemNode("root", 0, false, null);
             var currentNode = fileSystem;
@@ -42,11 +54,7 @@ namespace Day7
                 }
             }
 
-            var flatTree = fileSystem.Flatten();
-
-            return flatTree
-                .Where(f => f.Size <= 100000 && !f.IsFile)
-                .Sum(f => f.Size);
+            return fileSystem.Flatten();
         }
 
         public void TryAddFolder(FileSystemNode currentNode, string name)
@@ -59,7 +67,18 @@ namespace Day7
 
         public int SolveB(IEnumerable<string> inputLines)
         {
-            return 0;
+            var flatTree = GetFlatrTree(inputLines);
+
+            var totalUsedSpace = flatTree.Max(x => x.Size);
+
+            var currentlyAvailable = TotalSpace - totalUsedSpace;
+            var toFree = RequiredUnusedSpace - currentlyAvailable;
+
+            return flatTree
+                .OrderBy(n => n.Size)
+                .Where(n => n.Size >= toFree)
+                .Select(n => n.Size)
+                .FirstOrDefault();
         }
 
         public (int Size, string Name) GetSizeAndName(string line)
