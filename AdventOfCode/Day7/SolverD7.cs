@@ -10,14 +10,14 @@ namespace Day7
 
         public int SolveA(IEnumerable<string> inputLines)
         {
-            var flatTree = GetFlatrTree(inputLines);
+            var flatTree = GetFlatTree(inputLines);
 
             return flatTree
                 .Where(f => f.Size <= 100000 && !f.IsFile)
                 .Sum(f => f.Size);
         }
 
-        public IEnumerable<FileSystemNode> GetFlatrTree(IEnumerable<string> inputLines)
+        public IEnumerable<FileSystemNode> GetFlatTree(IEnumerable<string> inputLines)
         {
             var fileSystem = new FileSystemNode("root", 0, false, null);
             var currentNode = fileSystem;
@@ -67,7 +67,7 @@ namespace Day7
 
         public int SolveB(IEnumerable<string> inputLines)
         {
-            var flatTree = GetFlatrTree(inputLines);
+            var flatTree = GetFlatTree(inputLines);
 
             var totalUsedSpace = flatTree.Max(x => x.Size);
 
