@@ -8,15 +8,20 @@ namespace Day8
         static void Main(string[] args)
         {
             var solver = new SolverD8();
-            var input = FileReader.GetTestInputForDay(8);
+            var input = FileReader.GetInputLinesForDay(8);
 
             var testInput = FileReader.GetTestInputForDay(8);
-            var test = solver.SolveA(testInput);
-            Assert.That(test, Is.EqualTo(21));
+            var testA = solver.SolveA(testInput);
+            var testB = solver.SolveB(testInput);
+
+            Assert.That(testA, Is.EqualTo(21));
+            Assert.That(testB, Is.EqualTo(8));
 
             var output = solver.SolveA(input);
+            var outputB = solver.SolveB(input);
 
             Console.WriteLine($"Part A: {output}");
+            Console.WriteLine($"Part B: {outputB}");
         }
     }
 }
