@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace Day8
+﻿namespace Day8
 {
     public class SolverD8
     {
