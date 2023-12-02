@@ -1,6 +1,14 @@
 class Solver0():
     def solve_a(self, file):
-        return "Solver A executed for day 0..."
+        result = 0
+        lines = file.readlines()
+        for line in lines:
+            result = result + int(line)
+        return result
 
     def solve_b(self, file):
-        return "Solver B executed for day 0..."
+        result = 1
+        lines = file.readlines()
+        for line in lines:
+            result = result * int(line)
+        return result
