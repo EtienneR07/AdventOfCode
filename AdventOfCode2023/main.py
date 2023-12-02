@@ -1,6 +1,6 @@
 import sys
 from importlib import import_module
-from helpers.file_helper import get_file
+from helpers.file_helper import get_file_lines
 import argparse
 import os
 
@@ -30,14 +30,14 @@ def main():
     class_ = getattr(module, f"Solver{day_number}")
     instance = class_()
 
-    file = get_file(file_name)
+    file_lines = get_file_lines(file_name)
 
     if args.solveA:
-        resultA = instance.solve_a(file)
+        resultA = instance.solve_a(file_lines)
         print(resultA)
 
     if args.solveB:
-        resultB = instance.solve_b(file)
+        resultB = instance.solve_b(file_lines)
         print(resultB)
 
 
