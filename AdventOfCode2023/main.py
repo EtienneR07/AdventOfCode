@@ -3,17 +3,6 @@ from importlib import import_module
 from helpers.file_helper import get_file
 import argparse
 import os
-import unittest
-
-
-def test_a(solver, test_file, expected):
-    actual = solver.solve_a(test_file)
-    assert actual == expected
-
-
-def test_b(solver, test_file, expected):
-    actual = solver.solve_b(test_file)
-    assert actual == expected
 
 
 def main():
@@ -21,10 +10,7 @@ def main():
     sys.path.append(solvers_directory)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--runTestA", type=int,
-                        help="run test for solver A with expected value")
-    parser.add_argument("--runTestB", type=int,
-                        help="run test for solver A with expected value")
+
     parser.add_argument("--solveA", action="store_true",
                         help="execute Solver A")
     parser.add_argument("--solveB", action="store_true",
@@ -45,14 +31,6 @@ def main():
     instance = class_()
 
     file = get_file(file_name)
-
-    if args.runTestA:
-        test_a(instance, file, args.runTestA)
-        sys.exit()
-
-    if args.runTestB:
-        test_b(instance, file, args.runTestB)
-        sys.exit()
 
     if args.solveA:
         resultA = instance.solve_a(file)
