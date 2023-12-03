@@ -73,7 +73,6 @@ class Solver3():
                 matched_values.extend([int(m[2])
                                       for m in next_line_matches])
 
-        print(matched_values)
         return np.prod(matched_values) if len(matched_values) == 2 else 0
 
     def solve_a(self, lines):
