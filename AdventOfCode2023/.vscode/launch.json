@@ -8,13 +8,13 @@
         
         {"name":"Python: Current File","type":"python","request":"launch","program":"${file}","console":"integratedTerminal","justMyCode":true},
         {
-            "name": "Python: Day 4",
+            "name": "Python: Day 5",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["--fileName","day4_test", "--dayNumber", "4", "--solveB"]
+            "args": ["--fileName","day6_test", "--dayNumber", "6", "--solveA"]
         }
     ]
 }
