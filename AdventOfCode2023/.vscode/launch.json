@@ -14,7 +14,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["--fileName","day6_test", "--dayNumber", "6", "--solveA"]
+            "args": ["--fileName","day7", "--dayNumber", "7", "--solveB"]
         }
     ]
 }
