@@ -31,10 +31,12 @@ class Solver5():
         numbers = lines[0].split(':')[1].split()
         seed_ranges = [(int(numbers[i]), int(numbers[i]) + int(numbers[i + 1]))
                        for i in range(0, len(numbers) - 1, 2)]
-        sedd_ranges = []
+        seed_ranges = []
         for seed_range in seed_ranges:
-            sedd_ranges.append([[seed_range]])
-        return sedd_ranges
+            seed_ranges.append([[seed_range]])
+
+        print(seed_ranges)
+        return seed_ranges
 
     def in_range(self, number, range):
         return number >= range[0] and number <= range[1]
@@ -88,44 +90,7 @@ class Solver5():
 
     def process_ranges_for_seed_ranges(self, ranges, seed_ranges_mapper):
         for index, current_level in enumerate(seed_ranges_mapper):
-            ranges_to_map = current_level[-1]
-            new_ranges = []
-            print(seed_ranges_mapper[index])
-            ranges_copy = copy.deepcopy(ranges_to_map)
-            for range in ranges:
-                for to_map in ranges_to_map:
-                    intersection = self.get_intersection(
-                        (range[0], range[1]), to_map)
-
-                    if intersection is None:
-                        continue
-
-                    if to_map in ranges_copy:
-                        if intersection == to_map:
-                            ranges_copy.remove(to_map)
-                        else:
-                            index_of_item = ranges_copy.index(to_map)
-                            retracted = self.retract_intersection(
-                                to_map,
-                                intersection)
-                            if len(retracted) == 1:
-                                ranges_copy[index_of_item] = retracted[0]
-                            else:
-                                ranges_copy.remove(to_map)
-                                ranges_copy.extend(retracted)
-
-                    distanceStart = intersection[0] - range[0]
-                    distanceEnd = intersection[1] - range[0]
-                    mapped_intersection = (
-                        range[2] + distanceStart, range[2] + distanceEnd)
-                    new_ranges.append(mapped_intersection)
-
-            if any(ranges_copy):
-                new_ranges.extend(ranges_copy)
-
-            if any(new_ranges):
-                new_ranges = self.merge_ranges(new_ranges)
-                seed_ranges_mapper[index].append(new_ranges)
+            return 0
 
     def solve_core(self, lines, mapping):
         ranges_to_process = []

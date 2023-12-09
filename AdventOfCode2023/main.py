@@ -30,7 +30,7 @@ def main():
     class_ = getattr(module, f"Solver{day_number}")
     instance = class_()
 
-    file_lines = get_file_lines(file_name)
+    file_lines = get_file_lines(f"day{day_number}/{file_name}")
 
     if args.solveA:
         resultA = instance.solve_a(file_lines)
