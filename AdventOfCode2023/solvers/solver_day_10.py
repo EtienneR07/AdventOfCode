@@ -69,10 +69,11 @@ class Landscape:
 
     def get_steps_from_farthest_point(self):
         current_coordinates = self.find_animal_coordinates()
+        animal = current_coordinates
         visited = self.recursion(
             current_coordinates, current_coordinates)
 
-        return len(visited) // 2
+        return len(visited) // 2, visited
 
     def recursion(self, last_coordinates, current_coordinates):
         visited = []
@@ -103,4 +104,32 @@ class Solver10():
         return landscape.get_steps_from_farthest_point()
 
     def solve_b(self, lines):
-        return 0
+        lines = [line.replace('\n', '') for line in lines]
+        sys.setrecursionlimit(100000)
+        landscape = Landscape(lines)
+        _, visited = landscape.get_steps_from_farthest_point()
+        visited_set = set(visited)
+        total = 0
+        for y, line in enumerate(lines):
+            count_in_line = 0
+            coords_x = []
+            for x, c in enumerate(line):
+                if (x, y) in visited_set:
+                    count_in_line += 1
+                    coords_x.append(x)
+
+            total += self.count_between(coords)
+        return total
+
+    def count_between(self, coords):
+        new_list = []
+        for coord in coords:
+
+        paired_numbers = [(coords[0][i], coords[0][i + 1])
+                          for i in range(0, len(coords[0]), 2)]
+        total = 0
+        for pair in paired_numbers:
+            diff = pair[1] - pair[0] - 1
+            if diff > 0:
+                total += diff
+        return total
