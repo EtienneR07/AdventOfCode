@@ -111,22 +111,38 @@ class Solver10():
         visited_set = set(visited)
         total = 0
         for y, line in enumerate(lines):
-            count_in_line = 0
-            coords_x = []
             for x, c in enumerate(line):
                 if (x, y) in visited_set:
-                    count_in_line += 1
-                    coords_x.append(x)
+                    continue
 
-            total += self.count_between(coords)
+                line_count = 0
+                for index in range(x, len(line)):
+                    if (index, y) in visited_set:
+                        line_count += 1
+                print(f"{(x, y)}: {line_count}")
+                if line_count % 2 == 1:
+                    total += 1
+
         return total
 
-    def count_between(self, coords):
-        new_list = []
-        for coord in coords:
+        grouped_coords = []
+        current = []
 
-        paired_numbers = [(coords[0][i], coords[0][i + 1])
-                          for i in range(0, len(coords[0]), 2)]
+        for coord in coords:
+            if not current or coord == current[-1] + 1:
+                current.append(coord)
+            else:
+                grouped_coords.append(current)
+                current = [coord]
+
+        if not grouped_coords or current != grouped_coords[-1]:
+            grouped_coords.append(current)
+
+        if len(grouped_coords) % 2 != 0:
+            return 0
+
+        paired_numbers = [(grouped_coords[i][-1], grouped_coords[i + 1][0])
+                          for i in range(0, len(grouped_coords), 2)]
         total = 0
         for pair in paired_numbers:
             diff = pair[1] - pair[0] - 1
