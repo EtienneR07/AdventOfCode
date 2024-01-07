@@ -82,7 +82,7 @@ class Landscape:
             new_y = current_coordinates.coordinate_y + direction[1]
             new_coord = Coordinates(new_x, new_y, self.landscape[new_y][new_x])
 
-            visited.append(new_coord.coordinates)
+            visited.append((new_coord.coordinates, new_coord.character))
 
             if new_coord.character == 'S':
                 return visited
@@ -97,7 +97,7 @@ class Landscape:
         return []
 
 
-class Solver10():
+class Solver10():    
     def solve_a(self, lines):
         sys.setrecursionlimit(100000)
         landscape = Landscape(lines)
@@ -107,29 +107,30 @@ class Solver10():
         lines = [line.replace('\n', '') for line in lines]
         sys.setrecursionlimit(100000)
         landscape = Landscape(lines)
+        lines = [line.replace('S', 'L') for line in lines]
         _, visited = landscape.get_steps_from_farthest_point()
-        visited_set = set(visited)
+        first, last = visited[0], visited[-2]
+        visited_set = set([t[0] for t in visited])
         total = 0
+
         for y, line in enumerate(lines):
-            count_in_line = 0
-            coords_x = []
             for x, c in enumerate(line):
+                border_count = 0
+                borders_in_a_row = 0
                 if (x, y) in visited_set:
-                    count_in_line += 1
-                    coords_x.append(x)
+                    continue
+                
+                for index in range(x, len(line)):
+                    if (index, y) in visited_set:
+                        if line[index] == '|' or line[index] == 'L' or line[index] == 'F':
+                            border_count += 1
+                            continue
 
-            total += self.count_between(coords)
-        return total
-
-    def count_between(self, coords):
-        new_list = []
-        for coord in coords:
-
-        paired_numbers = [(coords[0][i], coords[0][i + 1])
-                          for i in range(0, len(coords[0]), 2)]
-        total = 0
-        for pair in paired_numbers:
-            diff = pair[1] - pair[0] - 1
-            if diff > 0:
-                total += diff
+                        if line[index] == '7' or line[index] == 'J':
+                            border_count += 1
+                            continue
+                    
+                if border_count % 2 == 1:
+                    print(f"({x}, {y}) is inside")
+                    total += 1
         return total
