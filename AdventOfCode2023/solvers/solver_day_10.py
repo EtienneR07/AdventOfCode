@@ -82,7 +82,7 @@ class Landscape:
             new_y = current_coordinates.coordinate_y + direction[1]
             new_coord = Coordinates(new_x, new_y, self.landscape[new_y][new_x])
 
-            visited.append(new_coord.coordinates)
+            visited.append((new_coord.coordinates, new_coord.character))
 
             if new_coord.character == 'S':
                 return visited
@@ -97,7 +97,7 @@ class Landscape:
         return []
 
 
-class Solver10():
+class Solver10():    
     def solve_a(self, lines):
         sys.setrecursionlimit(100000)
         landscape = Landscape(lines)
@@ -107,45 +107,30 @@ class Solver10():
         lines = [line.replace('\n', '') for line in lines]
         sys.setrecursionlimit(100000)
         landscape = Landscape(lines)
+        lines = [line.replace('S', 'L') for line in lines]
         _, visited = landscape.get_steps_from_farthest_point()
-        visited_set = set(visited)
+        first, last = visited[0], visited[-2]
+        visited_set = set([t[0] for t in visited])
         total = 0
+
         for y, line in enumerate(lines):
             for x, c in enumerate(line):
+                border_count = 0
+                borders_in_a_row = 0
                 if (x, y) in visited_set:
                     continue
-
-                line_count = 0
+                
                 for index in range(x, len(line)):
                     if (index, y) in visited_set:
-                        line_count += 1
-                print(f"{(x, y)}: {line_count}")
-                if line_count % 2 == 1:
+                        if line[index] == '|' or line[index] == 'L' or line[index] == 'F':
+                            border_count += 1
+                            continue
+
+                        if line[index] == '7' or line[index] == 'J':
+                            border_count += 1
+                            continue
+                    
+                if border_count % 2 == 1:
+                    print(f"({x}, {y}) is inside")
                     total += 1
-
-        return total
-
-        grouped_coords = []
-        current = []
-
-        for coord in coords:
-            if not current or coord == current[-1] + 1:
-                current.append(coord)
-            else:
-                grouped_coords.append(current)
-                current = [coord]
-
-        if not grouped_coords or current != grouped_coords[-1]:
-            grouped_coords.append(current)
-
-        if len(grouped_coords) % 2 != 0:
-            return 0
-
-        paired_numbers = [(grouped_coords[i][-1], grouped_coords[i + 1][0])
-                          for i in range(0, len(grouped_coords), 2)]
-        total = 0
-        for pair in paired_numbers:
-            diff = pair[1] - pair[0] - 1
-            if diff > 0:
-                total += diff
         return total
