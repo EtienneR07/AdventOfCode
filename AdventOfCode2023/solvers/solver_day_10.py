@@ -97,7 +97,7 @@ class Landscape:
         return []
 
 
-class Solver10():    
+class Solver10():
     def solve_a(self, lines):
         sys.setrecursionlimit(100000)
         landscape = Landscape(lines)
@@ -109,17 +109,15 @@ class Solver10():
         landscape = Landscape(lines)
         lines = [line.replace('S', 'L') for line in lines]
         _, visited = landscape.get_steps_from_farthest_point()
-        first, last = visited[0], visited[-2]
         visited_set = set([t[0] for t in visited])
         total = 0
 
         for y, line in enumerate(lines):
             for x, c in enumerate(line):
                 border_count = 0
-                borders_in_a_row = 0
                 if (x, y) in visited_set:
                     continue
-                
+
                 for index in range(x, len(line)):
                     if (index, y) in visited_set:
                         if line[index] == '|' or line[index] == 'L' or line[index] == 'F':
@@ -129,7 +127,7 @@ class Solver10():
                         if line[index] == '7' or line[index] == 'J':
                             border_count += 1
                             continue
-                    
+
                 if border_count % 2 == 1:
                     print(f"({x}, {y}) is inside")
                     total += 1
