@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "console": "integratedTerminal",
+      "type": "node",
+      "request": "launch",
+      "name": "Debug",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}\\src\\main.ts",
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"  // Include your output folder here
+      ],
+      "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
+    }
+  ]
+}
