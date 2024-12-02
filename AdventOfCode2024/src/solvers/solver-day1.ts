@@ -1,6 +1,6 @@
 import { ISolver } from "../solver.inteface";
-import fs from 'fs';
 import FileReader from '../files/file-reader';
+import { Solver } from "./solver";
 
 export class solverDay1 implements ISolver {
     public solveA(lines: string[][]) {
@@ -19,6 +19,7 @@ export class solverDay1 implements ISolver {
 
         return diffArray.reduce((sum, current) => sum + current, 0)
     }
+
     public solveB(lines: string[][]) {
         const firstRow = lines.map(l => l[0]);
         const secondRow = lines.map(l => l[1]);
@@ -34,21 +35,8 @@ export class solverDay1 implements ISolver {
 
 async function main() {
     const solver = new solverDay1();
-    const filerReader = new FileReader();
-
-    const testLines = await filerReader.readFileAndParse('./src/files/day1_test.txt');
-    const actualLines = await filerReader.readFileAndParse('./src/files/day1_actual.txt');
-
-    var resATest = solver.solveA(testLines)
-    var resBTest = solver.solveB(testLines)
-
-    var resA = solver.solveA(actualLines)
-    var resB = solver.solveB(actualLines)
-
-    console.log(resATest)
-    console.log(resBTest)
-    console.log(resA)
-    console.log(resB)
+    const generic = new Solver();
+    generic.solveDay(solver, 1);
 }
 
 main();
