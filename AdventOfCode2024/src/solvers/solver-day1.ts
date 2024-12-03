@@ -1,5 +1,4 @@
 import { ISolver } from "../solver.inteface";
-import FileReader from '../files/file-reader';
 import { Solver } from "./solver";
 
 export class solverDay1 implements ISolver {

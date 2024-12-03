@@ -14,9 +14,10 @@ export class Solver {
         var resA = solver.solveA(actualLines)
         var resB = solver.solveB(actualLines)
 
-        console.log(resATest)
-        console.log(resBTest)
-        console.log(resA)
-        console.log(resB)
+        console.log(`Test A: ${resATest}`);
+        console.log(`Actual A: ${resA}`)
+
+        console.log(`Test B: ${resBTest}`)
+        console.log(`Actual B: ${resB}`)
     }
 }

@@ -9,7 +9,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}\\src\\main.ts",
+      "program": "${workspaceFolder}\\src\\solvers\\solver-day2.ts",
       "outFiles": [
         "${workspaceFolder}/**/*.js"  // Include your output folder here
       ],
