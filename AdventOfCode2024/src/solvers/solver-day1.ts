@@ -1,7 +1,10 @@
+import FilerReader from "../files/file-reader";
 import { ISolver } from "../solver.inteface";
 import { Solver } from "./solver";
 
 export class solverDay1 implements ISolver {
+    public Reader = new FilerReader();
+
     public solveA(lines: string[][]) {
         const firstRow = lines.map(l => l[0]).sort((a, b) => +a - +b);
         const secondRow = lines.map(l => l[1]).sort((a, b) => +a - +b);

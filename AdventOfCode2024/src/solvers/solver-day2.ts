@@ -1,7 +1,10 @@
+import FilerReader from "../files/file-reader";
 import { ISolver } from "../solver.inteface";
 import { Solver } from "./solver";
 
 export class solverDay2 implements ISolver {
+    public Reader = new FilerReader();
+
     public solveA(lines: string[][]) {
         return this.solve(lines);
     }

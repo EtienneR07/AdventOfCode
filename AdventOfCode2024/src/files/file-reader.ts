@@ -9,4 +9,14 @@ export default class FilerReader {
             });
         });
     }
+
+    public toStringArray(matrix: string[][]): string[] {
+        let newArray = [];
+
+        for (const line of matrix) {
+            newArray.push(line[0]);
+        }
+
+        return newArray;
+    }
 }

@@ -1,7 +1,10 @@
+import FilerReader from "../files/file-reader";
 import { ISolver } from "../solver.inteface";
 import { Solver } from "./solver";
 
 export class solverDay3 implements ISolver {
+    public Reader = new FilerReader();
+
     public solveA(lines: string[][]) {
         const flattened = lines.flat().join("");
         return this.solve(flattened);
