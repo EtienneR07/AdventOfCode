@@ -20,9 +20,17 @@ export class solverDay5 implements ISolver {
         let rulesDictionary = this.getRules(rulesAndUpdates.Rules);
         const invalidUpdates = this.separateValidations(rulesAndUpdates.Updates, rulesDictionary).Invalid;
 
-        for (const numbers of invalidUpdates) {
+        for (const update of invalidUpdates) {
+            update.sort((n1: number, n2: number) => {
+                if (rulesAndUpdates.Rules.includes(`${n1}|${n2}`)) {
+                    return -1;
+                }
 
+                return 1;
+            })
         }
+
+        return this.getMiddleSum(invalidUpdates);
     }
 
     private getRules(rules: string[]): { [page: number]: number[] } {
