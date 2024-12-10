@@ -5,8 +5,8 @@ export class Solver {
     public async solveDay(solver: ISolver, day: number) {
         const filerReader = new FileReader();
 
-        const testLines = await filerReader.readFileAndParse(`./src/files/day${day}_test.txt`);
-        const actualLines = await filerReader.readFileAndParse(`./src/files/day${day}_actual.txt`);
+        const testLines = await filerReader.readFileAndParse(`./src/files/day${day}/test.txt`);
+        const actualLines = await filerReader.readFileAndParse(`./src/files/day${day}/actual.txt`);
 
         // var resATest = solver.solveA(testLines)
         // var resA = solver.solveA(actualLines)
