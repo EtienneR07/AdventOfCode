@@ -11,13 +11,13 @@ export class Solver {
         // var resATest = solver.solveA(testLines)
         // var resA = solver.solveA(actualLines)
 
-        // var resBTest = solver.solveB(testLines)
+        //var resBTest = solver.solveB(testLines)
         var resB = solver.solveB(actualLines)
 
         // console.log(`Test A: ${resATest}`);
         // console.log(`Actual A: ${resA}`)
 
-        // console.log(`Test B: ${resBTest}`)
+        //console.log(`Test B: ${resBTest}`)
         console.log(`Actual B: ${resB}`)
     }
 }
