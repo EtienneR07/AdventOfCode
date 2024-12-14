@@ -76,11 +76,7 @@ export class solverDay9 implements ISolver {
                 streak++;
             } else {
                 if (streak > 0) {
-                    console.log(`Found streak of ${streak} for number ${currentNumber}`);
-
                     let emptyIndex = this.getIndexOfFirstEmptyStreak(array, streak);
-
-                    console.log(`Found empty streak starting at index: ${emptyIndex}`);
 
                     if (emptyIndex !== null && emptyIndex < i) {
                         for (let j = 0; j < streak; j++) {
