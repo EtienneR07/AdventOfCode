@@ -72,7 +72,7 @@ export class solverDay10 implements ISolver {
                 continue;
             }
 
-            visited.push(point)
+            visited.push(point);
 
             let adj = this.getAdjacentPlusOnes(array, point);
 

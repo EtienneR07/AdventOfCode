@@ -8,16 +8,10 @@ export class Solver {
         const testLines = await filerReader.readFileAndParse(`./src/files/day${day}/test.txt`);
         const actualLines = await filerReader.readFileAndParse(`./src/files/day${day}/actual.txt`);
 
-        var resATest = solver.solveA(testLines)
-        var resA = solver.solveA(actualLines)
+        var a = solver.solveA(actualLines)
+        var b = solver.solveB(testLines)
 
-        var resBTest = solver.solveB(testLines)
-        var resB = solver.solveB(actualLines)
-
-        console.log(`Test A: ${resATest}`);
-        console.log(`Actual A: ${resA}`)
-
-        console.log(`Test B: ${resBTest}`)
-        console.log(`Actual B: ${resB}`)
+        console.log(`A: ${a}`);
+        console.log(`B: ${b}`);
     }
 }

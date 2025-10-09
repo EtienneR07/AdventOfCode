@@ -6,11 +6,9 @@ export class solverDay24 implements ISolver {
     public Reader = new FilerReader();
 
     public solveA(matrix: string[][]) {
-
     }
 
     public solveB(matrix: string[][]) {
-
     }
 }
 
