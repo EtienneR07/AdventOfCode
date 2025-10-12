@@ -4,3 +4,6 @@
  2023 in Python (unfinished)
  
  2024 in TypeScript (unfinished)
+
+ 2025 in Java (unfinished)
+
