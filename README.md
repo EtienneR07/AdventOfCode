@@ -5,5 +5,6 @@
  
  2024 in TypeScript (unfinished)
 
- 2025 in Java (unfinished)
+ 2025 in Golang (unfinished)
+
 
