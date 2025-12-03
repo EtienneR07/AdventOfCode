@@ -20,8 +20,8 @@ func main() {
 
 	str := utils.GetString("puzzles/day2.txt")
 
-	solveA(str)
-	// solveB(str)
+	// solveA(str)
+	solveB(str)
 
 	elapsed := time.Since(start)
 
@@ -86,7 +86,7 @@ func checkInvalidsInPairs(rangeChan <-chan Range, sum chan<- int, wg *sync.WaitG
 		startStr := strconv.Itoa(rangePair.start)
 		endStr := strconv.Itoa(rangePair.end)
 
-		if len(startStr) == len(endStr) && len(startStr)%2 != 0 {
+		if len(startStr) == len(endStr) && len(startStr)%2 != 0 && puzA {
 			continue
 		}
 
@@ -109,7 +109,42 @@ func invalidIds(num int, puzA bool) int {
 			num, _ := strconv.Atoi(str)
 			return num
 		}
+	} else {
+		for i := 2; i <= len(str); i++ {
+			if len(str)%i != 0 {
+				continue
+			}
+
+			parts := getParts(str, i)
+
+			if allPartsEqual(parts) {
+				num, _ := strconv.Atoi(str)
+				return num
+			}
+		}
 	}
 
 	return 0
+}
+
+func getParts(str string, n int) []string {
+	parts := make([]string, 0, n)
+	size := len(str) / n
+
+	for i := 0; i < len(str); i = i + size {
+		parts = append(parts, str[i:i+size])
+	}
+
+	return parts
+}
+
+func allPartsEqual(parts []string) bool {
+	f := parts[0]
+	for i := 0; i < len(parts); i++ {
+		if parts[i] != f {
+			return false
+		}
+	}
+
+	return true
 }
