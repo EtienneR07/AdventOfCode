@@ -20,8 +20,8 @@ func main() {
 
 	str := utils.GetString("puzzles/day2.txt")
 
-	// solveA(str)
-	solveB(str)
+	solveA(str)
+	// solveB(str)
 
 	elapsed := time.Since(start)
 
