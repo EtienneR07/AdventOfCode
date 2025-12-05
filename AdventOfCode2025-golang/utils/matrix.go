@@ -2,16 +2,32 @@ package utils
 
 import (
 	"fmt"
+	"iter"
 	"strconv"
+	"strings"
 )
 
 type Matrix[T any] struct {
 	matrix [][]T
 }
 
-func newMatrix[T any]() *Matrix[T] {
+func NewMatrix[T any]() *Matrix[T] {
 	return &Matrix[T]{
 		matrix: make([][]T, 0),
+	}
+}
+
+func (matrix *Matrix[T]) Add(row []T) {
+	matrix.matrix = append(matrix.matrix, row)
+}
+
+func (matrix Matrix[T]) Rows() iter.Seq2[int, []T] {
+	return func(yield func(int, []T) bool) {
+		for i, row := range matrix.matrix {
+			if !yield(i, row) {
+				return
+			}
+		}
 	}
 }
 
@@ -32,9 +48,10 @@ func GetStrMatrix(lines []string) *Matrix[string] {
 		return nil
 	}
 
-	matrix := newMatrix[string]()
+	matrix := NewMatrix[string]()
 
 	for _, line := range lines {
+		line = strings.TrimSpace(line)
 		row := make([]string, 0, len(line))
 		for _, char := range line {
 			row = append(row, string(char))
@@ -51,7 +68,7 @@ func GetIntMatrix(lines []string) *Matrix[int] {
 		return nil
 	}
 
-	matrix := newMatrix[int]()
+	matrix := NewMatrix[int]()
 
 	for _, line := range lines {
 		row := make([]int, 0, len(line))
@@ -64,4 +81,13 @@ func GetIntMatrix(lines []string) *Matrix[int] {
 	}
 
 	return matrix
+}
+
+func (matrix Matrix[T]) PrintMatrix() {
+	for i := 0; i < len(matrix.matrix); i++ {
+		for j := 0; j < len(matrix.matrix[i]); j++ {
+			print(matrix.matrix[i][j])
+		}
+		println()
+	}
 }
