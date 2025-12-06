@@ -97,41 +97,5 @@ func getHighestJoltageB(bank string) int {
 		rawDigits = append(rawDigits, num)
 	}
 
-	m := map[int]int{}
-	for i := 0; i < 12; i++ {
-		highest := 0
-		highestIndex := -1
-		for j, digit := range rawDigits {
-			if _, ok := m[j]; ok {
-				continue
-			}
-
-			if digit > highest {
-				highest = digit
-				highestIndex = j
-			}
-		}
-
-		m[highestIndex] = highest
-	}
-
-	keys := make([]int, 0, len(m))
-	for k := range m {
-		keys = append(keys, k)
-	}
-	sort.Ints(keys)
-
-	sortedDigits := make([]int, 0, 12)
-	for _, k := range keys {
-		sortedDigits = append(sortedDigits, m[k])
-	}
-
-	str := ""
-	for _, d := range sortedDigits {
-		str += strconv.Itoa(d)
-	}
-
-	finalNum, _ := strconv.Atoi(str)
-
 	return finalNum
 }
