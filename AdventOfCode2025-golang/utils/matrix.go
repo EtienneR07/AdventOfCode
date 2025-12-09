@@ -43,7 +43,7 @@ func (matrix Matrix[T]) Get(x int, y int) (T, error) {
 	return matrix.matrix[y][x], nil
 }
 
-func GetStrMatrix(lines []string) *Matrix[string] {
+func GetStrMatrix(lines []string, trim bool) *Matrix[string] {
 	if len(lines) == 0 || len(lines[0]) == 0 {
 		return nil
 	}
@@ -51,7 +51,9 @@ func GetStrMatrix(lines []string) *Matrix[string] {
 	matrix := NewMatrix[string]()
 
 	for _, line := range lines {
-		line = strings.TrimSpace(line)
+		if trim {
+			line = strings.TrimSpace(line)
+		}
 		row := make([]string, 0, len(line))
 		for _, char := range line {
 			row = append(row, string(char))
@@ -90,4 +92,30 @@ func (matrix Matrix[T]) PrintMatrix() {
 		}
 		println()
 	}
+}
+
+func (matrix Matrix[T]) GetRotation() *Matrix[T] {
+	rowsLen := len(matrix.matrix)
+	if rowsLen == 0 {
+		return &Matrix[T]{}
+	}
+
+	colsLen := len(matrix.matrix[0])
+	if colsLen == 0 {
+		return &Matrix[T]{}
+	}
+
+	rotatedMatrix := make([][]T, colsLen)
+	for i := range rotatedMatrix {
+		rotatedMatrix[i] = make([]T, rowsLen)
+	}
+
+	for row := 0; row < rowsLen; row++ {
+		for col := 0; col < colsLen; col++ {
+			value, _ := matrix.Get(col, row)
+			rotatedMatrix[colsLen-1-col][row] = value
+		}
+	}
+
+	return &Matrix[T]{matrix: rotatedMatrix}
 }

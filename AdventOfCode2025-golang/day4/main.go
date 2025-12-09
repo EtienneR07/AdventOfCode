@@ -11,7 +11,7 @@ func main() {
 
 	lines := utils.GetLines("puzzles/day4.txt")
 
-	matrix := utils.GetStrMatrix(lines)
+	matrix := utils.GetStrMatrix(lines, true)
 
 	// solveA(matrix)
 	solveB(matrix)

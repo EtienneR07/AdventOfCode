@@ -18,7 +18,7 @@ func main() {
 
 	lines := utils.GetLines("puzzles/day5.txt")
 
-	// solveA(lines)
+	solveA(lines)
 	solveB(lines)
 
 	elapsed := time.Since(start)

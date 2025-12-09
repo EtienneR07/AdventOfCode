@@ -3,7 +3,6 @@ package main
 import (
 	"AdventOfCode2025/utils"
 	"fmt"
-	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -17,7 +16,7 @@ type Range struct {
 func main() {
 	start := time.Now()
 
-	lines := utils.GetLines("puzzles/day3_test.txt")
+	lines := utils.GetLines("puzzles/day3.txt")
 
 	// solveA(lines)
 	solveB(lines)
@@ -91,11 +90,24 @@ func getHighestJoltageA(bank string) int {
 }
 
 func getHighestJoltageB(bank string) int {
-	rawDigits := make([]int, 0, len(bank))
-	for i, _ := range bank {
-		num, _ := strconv.Atoi(string(bank[i]))
-		rawDigits = append(rawDigits, num)
+	batteries := ""
+
+	for i := 0; i < 12; i++ {
+		max := 0
+		index := 0
+		for j := 0; j <= len(bank)-12+len(batteries); j++ {
+			currNum, _ := strconv.Atoi(string(bank[j]))
+			if currNum > max {
+				max = currNum
+				index = j
+			}
+		}
+
+		batteries += strconv.Itoa(max)
+		bank = bank[index+1:]
 	}
 
-	return finalNum
+	number, _ := strconv.Atoi(batteries)
+
+	return number
 }
